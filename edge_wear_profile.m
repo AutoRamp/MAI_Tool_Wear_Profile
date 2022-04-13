@@ -95,26 +95,26 @@ if WARN == true
     w = msgbox(warning, 'Warning', 'warn');
     uiwait(w);
 end
-% 
-% x_axis_measurement_con = 0:measurement_length /(truncate - 1): measurement_length;
-% 
-% for i=1: length(d)
-%     figure;
-%     hold on; grid on; box on;
-%     g06 = plot(x_axis_measurement_con, dis(i, :));
-%     c06 = plot(x_axis_measurement_con, dis_con(i, :), 'r-');
-%     title('Turning Tool Surface Displacement Measurement');
-%     xlabel('Confocal Displacement Sensor Samples (mm)');
-%     ylabel('Surface Displacement (\mum)');
-%     legend('Initial Experimental Measurement', 'Control Measurement', 'Location', 'NorthWest');
-%     
-%     figure;
-%     hold on; axis on; box on; grid on;
-%     plot(x_axis_measurement_con, wear (i, :));
-%     title('Tool Wear Measurement');
-%     xlabel('Position From Reference x_axis_measurement (mm)');
-%     ylabel('Tool Wear (\mum)');
-% end
+
+x_axis_measurement_con = 0:measurement_length /(truncate - 1): measurement_length;
+
+for i=1: length(d)
+    figure;
+    hold on; grid on; box on;
+    g06 = plot(x_axis_measurement_con, dis(i, :));
+    c06 = plot(x_axis_measurement_con, dis_con(i, :), 'r-');
+    title('Turning Tool Surface Displacement Measurement');
+    xlabel('Confocal Displacement Sensor Samples (mm)');
+    ylabel('Surface Displacement (\mum)');
+    legend('Initial Experimental Measurement', 'Control Measurement', 'Location', 'NorthWest');
+    
+    figure;
+    hold on; axis on; box on; grid on;
+    plot(x_axis_measurement_con, wear (i, :));
+    title('Tool Wear Measurement');
+    xlabel('Position From Reference x_axis_measurement (mm)');
+    ylabel('Tool Wear (\mum)');
+end
 
 Vmax = max(abs(wear));
 Vmean = mean(abs(wear));
@@ -132,10 +132,53 @@ if WARN == true
     uiwait(w);
 end
 
+figure;
+surf(wear);
+xlabel('Surface Measurement Samples');
+ylabel('Measurement Track');
+zlabel('Wear Depth (\mum)');
+title('Wear Profile Surface Plot');
+
+figure;
+surf(dis);
+a = colorbar;
+xlabel('Surface Displacement Measurement Samples');
+ylabel('Measurement Track');
+a.Label.String = 'Surface Depth (\mum)';
+title('Surface Displacement Profile (Worn Side)');
+
+figure;
+surf(dis_con);
+a = colorbar;
+xlabel('Surface Displacement Measurement Samples');
+ylabel('Measurement Track');
+a.Label.String = 'Surface Depth (\mum)';
+title('Surface Displacement Profile (Control Side)');
 
 figure;
 imagesc(wear);
-colorbar;
+a = colorbar;
+xlabel('Surface Measurement Samples');
+ylabel('Measurement Track');
+zlabel('Wear Depth (\mum)');
+a.Label.String = 'Surface Depth (\mum)';
+title('Wear Profile Heat');
+
+figure;
+imagesc(dis);
+a = colorbar;
+xlabel('Surface Displacement Measurement Samples');
+ylabel('Measurement Track');
+a.Label.String = 'Surface Depth (\mum)';
+title('Surface Displacement Profile (Worn Side)');
+
+figure;
+imagesc(dis_con);
+a = colorbar;
+xlabel('Surface Displacement Measurement Samples');
+ylabel('Measurement Track');
+a.Label.String = 'Surface Depth (\mum)';
+title('Surface Displacement Profile (Control Side)');
 
 fprintf('Vb: '); 
 disp(Vb);

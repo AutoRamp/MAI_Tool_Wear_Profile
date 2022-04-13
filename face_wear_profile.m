@@ -112,50 +112,30 @@ end
 x_axis_measurement = 0:measurement_length/(truncate - 1): measurement_length;
 x_axis_measurement_con = 0:measurement_length/(truncate - 1): measurement_length;
 
-% for i=1: length(d)
-%     figure;
-%     hold on; grid on; box on;
-%     g06 = plot(x_axis_measurement, dis(i, :));
-%     c06 = plot(x_axis_measurement_con, dis_con(i, :), 'r-');
-%     title('Turning Tool Surface Displacement Measurement');
-%     xlabel('Confocal Displacement Sensor Samples (mm)');
-%     ylabel('Surface Displacement (\mum)');
-%     legend('Initial Experimental Measurement', 'Control Measurement', 'Location', 'NorthWest');
-%     
-%     figure;
-%     hold on; axis on; box on; grid on;
-%     plot(x_axis_measurement, wear (i, :));
-%     title('Tool Wear Measurement');
-%     xlabel('Position From Reference x_axis_measurement (mm)');
-%     ylabel('Tool Wear (\mum)');
-% end
-
-
-figure;
-% % heat_map = imagesc(wear);
-% saveas(heat_map, 'heat_map.jpg');
-a = colorbar;
-xlabel('Crater Wear Measurement Samples');
-ylabel('Measurement Track');
-a.Label.String = 'Surface Depth (\mum)';
-title('Crater Wear Heat Map');
-
-% figure;
-% axis on;
-% imshow('overlay.jpg');
-% b = colorbar;
-% caxis([0 125]);
-% xlabel('Crater Wear Measurement Samples');
-% ylabel('Measurement Track');
-% b.Label.String = 'Surface Depth (\mum)';
-% title('Crater Wear Heat Map');
+for i=1: length(d)
+    figure;
+    hold on; grid on; box on;
+    g06 = plot(x_axis_measurement, dis(i, :));
+    c06 = plot(x_axis_measurement_con, dis_con(i, :), 'r-');
+    title('Turning Tool Surface Displacement Measurement');
+    xlabel('Confocal Displacement Sensor Samples (mm)');
+    ylabel('Surface Displacement (\mum)');
+    legend('Initial Experimental Measurement', 'Control Measurement', 'Location', 'NorthWest');
+    
+    figure;
+    hold on; axis on; box on; grid on;
+    plot(x_axis_measurement, wear (i, :));
+    title('Tool Wear Measurement');
+    xlabel('Position From Reference x_axis_measurement (mm)');
+    ylabel('Tool Wear (\mum)');
+end
 
 figure;
 surf(wear);
-xlabel('Crater Wear Measurement Samples');
+xlabel('Surface Measurement Samples');
 ylabel('Measurement Track');
-zlabel('Crater Wear Depth (\mum)');
-title('Crater Wear Surface Plot');
+zlabel('Wear Depth (\mum)');
+title('Wear Profile Surface Plot');
 
 figure;
 surf(dis);
@@ -176,11 +156,11 @@ title('Surface Displacement Profile (Control Side)');
 figure;
 imagesc(wear);
 a = colorbar;
-xlabel('Crater Wear Measurement Samples');
+xlabel('Surface Measurement Samples');
 ylabel('Measurement Track');
-zlabel('Crater Wear Depth (\mum)');
+zlabel('Wear Depth (\mum)');
 a.Label.String = 'Surface Depth (\mum)';
-title('Crater Wear Surface Plot');
+title('Wear Profile Heat');
 
 figure;
 imagesc(dis);
